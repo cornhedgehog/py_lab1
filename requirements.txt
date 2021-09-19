@@ -1,2 +1,6 @@
 flask
 gunicorn
+pillow
+matplotlib
+opencv-python-headless
+numpy

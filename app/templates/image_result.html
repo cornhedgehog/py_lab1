@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Python lab 1</title>
+    <link rel="stylesheet"
+          href="static/styles/index.css">
+</head>
+<body>
+        <p>
+            <label for="pic1">Картинка #1:</label>
+            <img src="{{url_for('static', filename='img_folder/' + image_results.pic1)}}"/>
+        </p>
+        <p>
+            <label for="pic1">Гистограмма распределения цветов картинки #1:</label>
+            <img src="{{url_for('static', filename='img_folder/' + image_results.hist1)}}"/>
+        </p>
+        <p>
+            <label for="pic2">Картинка #2:</label>
+            <img src="{{url_for('static', filename='img_folder/' + image_results.pic2)}}"/>
+        </p>
+        <p>
+            <label for="pic1">Гистограмма распределения цветов картинки #2:</label>
+            <img src="{{url_for('static', filename='img_folder/' + image_results.hist3)}}"/>
+        </p>
+        <p>
+            <label for="pic2">Соединенная картинка:</label>
+            <img src="{{url_for('static', filename='img_folder/merged_image.png')}}"/>
+        </p>
+        <p>
+            <label for="pic1">Гистограмма распределения цветов картинки #3:</label>
+            <img src="{{url_for('static', filename='img_folder/' + image_results.hist3)}}"/>
+        </p>
+
+
+</body>
+
+</html>

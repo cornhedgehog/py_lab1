@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python lab 1</title>
+    <link rel="stylesheet"
+          href="static/styles/index.css">
+    <script type="text/javascript" src="static/styles/jquery.js"></script>
+    <script type="text/javascript">// <![CDATA[
+        function loading() {
+            $("#loading").show();
+            $("#container").hide();
+        }
+        // ]]></script>
+    </head>
+
+<body>
+    <div id="loading">
+        <img src="{{url_for('static', filename='styles/loading.gif')}}">
+    </div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img
+                     src="https://tusur.ru/assets/logotype-ec8d3683128d186ea5458db2dc38dffd9c701a92a7265c30fb01350a8869307f.png">
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <form action=""
+              method="post"
+              enctype="multipart/form-data">
+            <p>
+                <input type="file"
+                       id="pic1"
+                       name="pic1"
+                       accept="image/png, image/jpeg">
+                <label class="piclink"
+                       for="pic1">Картинка #1: нажмите сюда, чтобы выбрать первую картинку</label>
+            </p>
+            <p>
+                <input type="file"
+                       id="pic2"
+                       name="pic2"
+                       accept="image/png, image/jpeg">
+                <label class="piclink"
+                       for="pic2">Картинка #2: нажмите сюда, чтобы выбрать вторую картинку</label>
+            </p>
+            <p>
+                <label for="pic2">Соединить картинки:</label>
+            <div>
+                <input type="radio"
+                       id="pic-alignment"
+                       name="pic-alignment"
+                       value="h"
+                       checked>
+                <label for="horiz">Горизонтально</label>
+            </div>
+
+            <div>
+                <input type="radio"
+                       id="pic-alignment"
+                       name="pic-alignment"
+                       value="v">
+                <label for="vertic">Вертикально</label>
+            </div>
+            </p>
+            <p class="tooltip">
+                <input type="submit"
+                       value="Загрузить"
+                       onclick="loading();">
+                <span class="tooltiptext">Выберите две картинки, чтобы продолжить</span>
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>

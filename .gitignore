@@ -1,4 +1,9 @@
+# Project temp files
+app/static/img_folder
+
+# Visual Studio Code settings
 .vscode/settings.json
+.vscode/launch.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
