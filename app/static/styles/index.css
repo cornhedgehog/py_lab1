@@ -33,3 +33,7 @@
     background: url(loading.gif) no-repeat;
     cursor: wait;
 }
+
+.table-pic {
+  width: 400px
+}

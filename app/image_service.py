@@ -72,27 +72,47 @@ def get_rgb_hist(filename, picNumber):
 
 ###
 # This function concatenates images vertically or horizontally according to the second arg `merge_type`
-def merge_images(imagenames, merge_type):
+def merge_images(imagenames, merge_type, pic_length):
     full_filepath = os.path.join(app.config['UPLOAD_FOLDER'], MERGED_IMAGE_NAME)
     if merge_type == MergeType.Vertical:
-        image = get_image_concatenated_vertically(Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[0]), Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[1]))
+        image = get_image_concatenated_vertically(Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[0]), Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[1]), pic_length)
         image.save(full_filepath)
     else:
-        image = get_image_concatenated_horizontally(Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[0]), Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[1]))
+        image = get_image_concatenated_horizontally(Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[0]), Image.open(UPLOAD_FOLDER_FULL_PATH + imagenames[1]), pic_length)
         image.save(full_filepath)
     return get_rgb_hist(MERGED_IMAGE_NAME, PicOrder.Third)
 
 ###
 # This function concatenates two given images into one vertically. Images have to be Pillow images, not filenames
-def get_image_concatenated_vertically(im1, im2):
-    dst = Image.new('RGB', (im1.width, im1.height + im2.height))
+def get_image_concatenated_vertically(im1, im2, pic_length):
+    width = pic_length if pic_length != 0 else im1.width
+
+    wpercent = (width/float(im1.size[0]))
+    hsize = int((float(im1.size[1])*float(wpercent)))
+    im1 = im1.resize((width,hsize), Image.ANTIALIAS)
+
+    wpercent = (width/float(im2.size[0]))
+    hsize = int((float(im2.size[1])*float(wpercent)))
+    im2 = im2.resize((width,hsize), Image.ANTIALIAS)
+
+    dst = Image.new('RGB', (width, im1.height + im2.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (0, im1.height))
     return dst
 
 ###
 # This function concatenates two given images into one horizontally. Images have to be Pillow images, not filenames
-def get_image_concatenated_horizontally(im1, im2):
+def get_image_concatenated_horizontally(im1, im2, pic_length):
+    width = pic_length if pic_length != 0 else im1.width
+
+    wpercent = (width/float(im1.size[0]))
+    hsize = int((float(im1.size[1])*float(wpercent)))
+    im1 = im1.resize((width,hsize), Image.ANTIALIAS)
+
+    wpercent = (width/float(im2.size[0]))
+    hsize = int((float(im2.size[1])*float(wpercent)))
+    im2 = im2.resize((width,hsize), Image.ANTIALIAS)
+
     dst = Image.new('RGB', (im1.width + im2.width, im1.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (im1.width, 0))

@@ -24,8 +24,12 @@ def index():
                 hist2 = get_rgb_hist(path2, PicOrder.Second)
                 hists.append(hist2)
         if len(paths) == 2:
-            hist3 = merge_images(paths, request.form.get('pic-alignment'))
-            print(paths[0])
+            pic_length = request.form.get('pic-length')
+            if pic_length:
+                pic_length_parsed = int(pic_length)
+            else:
+                pic_length_parsed = 0
+            hist3 = merge_images(paths, request.form.get('pic-alignment'), pic_length_parsed)
             image_results = dict(pic1=paths[0], hist1=hists[0], pic2=paths[1], hist2=hists[1], pic3=MERGED_IMAGE_NAME, hist3=hist3)
             return render_template('image_result.html', image_results=image_results)
 
